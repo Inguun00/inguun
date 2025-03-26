@@ -14,7 +14,6 @@ const Cart = ({ cartItems, removeFromCart }) => {
           {cartItems.map((item, index) => (
             <li key={index} className="flex items-center justify-between p-4 border rounded-lg shadow-md">
               <div className="flex items-center gap-4">
-               
                 <div className="w-20 h-20 overflow-hidden rounded-lg">
                   <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
                 </div>
@@ -24,7 +23,6 @@ const Cart = ({ cartItems, removeFromCart }) => {
                   <p className="text-gray-600">Үнэ: <span className="font-bold">{item.price}₮</span></p>
                   <p className="text-gray-600">Тоо ширхэг: <span className="font-bold">{item.quantity}</span></p>
 
-           
                   {item.selectedColor && (
                     <div className="flex items-center gap-2 mt-1">
                       <span className="text-gray-600">Өнгө:</span>
@@ -46,8 +44,20 @@ const Cart = ({ cartItems, removeFromCart }) => {
       )}
 
       <div className="mt-6 text-lg font-semibold">
-        Нийт үнэ: <span className="text-green-600">{totalPrice.toFixed(2)}$</span>
+        Нийт үнэ: <span className="text-green-600">{totalPrice.toFixed(2)}₮</span>
       </div>
+
+      {/* Buy Now товчийг нэмэх */}
+      {cartItems.length > 0 && (
+        <div className="mt-6 flex justify-end">
+          <button
+            onClick={() => alert("Захиалга хийх функцийг энд бичнэ")}
+            className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition duration-300"
+          >
+            Buy Now
+          </button>
+        </div>
+      )}
     </div>
   );
 };

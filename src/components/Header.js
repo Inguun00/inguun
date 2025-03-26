@@ -7,9 +7,10 @@ const Header = ({ isAuthenticated, setIsAuthenticated, cartItems }) => {
 
   const handleAuthClick = () => {
     if (isAuthenticated) {
-      setIsAuthenticated(false);
+      setIsAuthenticated(false); // Гарах үед хэрэглэгчийн өгөгдлийг цэвэрлэх
+      navigate("/login"); // Гарахад логины хуудсанд очно
     } else {
-      navigate("/login");
+      navigate("/login"); // Нэвтрэх үед логин хуудсанд очно
     }
   };
 

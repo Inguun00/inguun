@@ -5,7 +5,9 @@ import Filter from "./components/filter";
 import Login from "./components/login";
 import Header from "./components/Header";
 import Cart from "./components/Cart";
-import ProductDetails from "./components/Productdetails"; // Бүтээгдэхүүний дэлгэрэнгүй
+import ProductDetails from "./components/Productdetails";
+import ProductList from "./components/productList";
+import AddProduct from "./components/addProduct";
 import "./input.css";
 import "./output.css";
 import "./App.css";
@@ -27,23 +29,20 @@ const App = () => {
 
   return (
     <Router>
-      {/* 🟢 Header Section */}
-      <Header isAuthenticated={!!user} cartItems={cartItems.length} />
-
-      {/* 🟢 Page Content */}
+      <Header isAuthenticated={!!user} setIsAuthenticated={setUser} cartItems={cartItems.length} />
       <div className="container mx-auto px-6 py-10 bg-gray-100 rounded-lg shadow-lg">
         <Routes>
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/cart" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} />} />
-          {/* 🟢 Market Page - ProtectedRoute */}
           <Route
             path="/market"
             element={
               <ProtectedRoute user={user} element={<MarketPage filters={filters} addToCart={addToCart} onFilterChange={handleFilterChange} />} />
             }
           />
-          {/* 🟢 Product Details Page */}
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/product-list" element={<ProductList />} />
         </Routes>
       </div>
     </Router>
@@ -52,11 +51,11 @@ const App = () => {
 
 const ProtectedRoute = ({ user, element }) => {
   const navigate = useNavigate();
-
   useEffect(() => {
-    if (!user) navigate("/login");
+    if (!user) {
+      navigate("/login");
+    }
   }, [user, navigate]);
-
   return user ? element : null;
 };
 
