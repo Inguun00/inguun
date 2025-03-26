@@ -9,7 +9,7 @@ function Login({ onLogin }) {
     
     if (creds.username === 'admin' && creds.password === '123') {
       onLogin && onLogin({ username: creds.username });
-      navigate('/stats');
+      navigate('/market');
     } else {
       alert('Нэвтрэх нэр эсвэл нууц үг буруу байна!');
     }
